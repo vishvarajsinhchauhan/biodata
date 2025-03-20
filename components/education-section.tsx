@@ -7,119 +7,126 @@ import type { EducationType } from "@/lib/data"
 import SectionDivider from "@/components/section-divider"
 import { cn } from "@/lib/utils"
 import { GraduationCap, Award, Briefcase } from "lucide-react"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 interface EducationSectionProps {
   education: EducationType[]
 }
 
 export default function EducationSection({ education }: EducationSectionProps) {
-  const sectionRef = useRef<HTMLElement>(null)
+  const { ref, isInView } = useScrollAnimation(0.2)
   const controls = useAnimation()
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, 100])
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8])
-
-  // Start animations when section comes into view
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return
-
-      const rect = sectionRef.current.getBoundingClientRect()
-      const isInView = rect.top < window.innerHeight && rect.bottom > 0
-
-      if (isInView) {
-        controls.start("visible")
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll() // Check on mount
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [controls])
-
-  const staggerChildren = {
+  const fadeInVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        duration: 0.4,
+        ease: "easeOut",
       },
     },
   }
 
-  const childVariant = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  }
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible")
+    }
+  }, [isInView, controls])
 
   return (
-    <section id="education" ref={sectionRef} className="py-20 min-h-screen flex flex-col justify-center relative">
+    <section ref={ref} className="py-16">
       <div className="container mx-auto px-4">
-        <motion.div style={{ opacity, y, scale }} className="max-w-4xl mx-auto">
-          <motion.h2
-            className={cn(
-              "text-4xl md:text-5xl font-serif font-bold text-center mb-16",
-              "bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80",
-            )}
-            initial={{ opacity: 0, y: 30 }}
-            animate={controls}
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Education & Career
-          </motion.h2>
-
-          <motion.div initial="hidden" animate={controls} variants={staggerChildren}>
-            <Card
-              className={cn(
-                "border-secondary/30 bg-white/80 backdrop-blur-md",
-                "shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]",
-                "overflow-hidden",
-              )}
-            >
-              <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 pb-4">
-                <CardTitle className="text-primary text-2xl font-serif">Academic & Professional Journey</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-8 pb-6">
-                <div className="space-y-8">
-                  {education.map((item, index) => (
-                    <motion.div key={index} variants={childVariant}>
-                      <EducationItem
-                        title={item.degree}
-                        institution={item.institution}
-                        year={item.year}
-                        description={item.description}
-                        type={item.type}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+        <motion.h2
+          className="text-3xl font-serif font-bold text-center mb-12"
+          initial="hidden"
+          animate={controls}
+          variants={fadeInVariants}
+        >
+          Education
+        </motion.h2>
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={fadeInVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+        >
+          {education.map((item, index) => (
+            <motion.div key={index} variants={fadeInVariants}>
+              <Card className="border-secondary/30 bg-white/80 backdrop-blur-md shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]">
+                <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 pb-4">
+                  <CardTitle className="text-primary text-xl sm:text-2xl font-serif">{item.degree}</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-8 pb-6">
+                  <div className="space-y-6">
+                    <DetailItem
+                      label="Institution"
+                      value={item.institution}
+                      icon={
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                          <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                          />
+                        </svg>
+                      }
+                    />
+                    <DetailItem
+                      label="Duration"
+                      value={item.duration}
+                      icon={
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                      }
+                    />
+                    <DetailItem
+                      label="Grade"
+                      value={item.grade}
+                      icon={
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                          />
+                        </svg>
+                      }
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </motion.div>
-      </div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-20 w-40 h-40 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="absolute bottom-12 left-0 right-0 flex justify-center">
-        <SectionDivider />
       </div>
     </section>
   )

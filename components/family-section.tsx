@@ -8,168 +8,253 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import type { FamilyType } from "@/lib/data"
 import SectionDivider from "@/components/section-divider"
 import { cn } from "@/lib/utils"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 interface FamilySectionProps {
   family: FamilyType
 }
 
 export default function FamilySection({ family }: FamilySectionProps) {
-  const sectionRef = useRef<HTMLElement>(null)
+  const { ref, isInView } = useScrollAnimation(0.2)
   const controls = useAnimation()
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, 100])
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8])
-
-  // Start animations when section comes into view
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return
-
-      const rect = sectionRef.current.getBoundingClientRect()
-      const isInView = rect.top < window.innerHeight && rect.bottom > 0
-
-      if (isInView) {
-        controls.start("visible")
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll() // Check on mount
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [controls])
-
-  const staggerChildren = {
+  const fadeInVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        duration: 0.4,
+        ease: "easeOut",
       },
     },
   }
 
-  const childVariant = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  }
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible")
+    }
+  }, [isInView, controls])
 
   return (
-    <section id="family" ref={sectionRef} className="py-20 min-h-screen flex flex-col justify-center relative">
+    <section ref={ref} className="py-16">
       <div className="container mx-auto px-4">
-        <motion.div style={{ opacity, y, scale }} className="max-w-4xl mx-auto">
-          <motion.h2
-            className={cn(
-              "text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-12 sm:mb-16",
-              "bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80",
-            )}
-            initial={{ opacity: 0, y: 30 }}
-            animate={controls}
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Family Background
-          </motion.h2>
-
-          <motion.div initial="hidden" animate={controls} variants={staggerChildren}>
-            <Card
-              className={cn(
-                "border-secondary/30 bg-white/80 backdrop-blur-md",
-                "shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]",
-                "overflow-hidden",
-              )}
-            >
+        <motion.h2
+          className="text-3xl font-serif font-bold text-center mb-12"
+          initial="hidden"
+          animate={controls}
+          variants={fadeInVariants}
+        >
+          Family Details
+        </motion.h2>
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={fadeInVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+        >
+          <motion.div variants={fadeInVariants}>
+            <Card className="border-secondary/30 bg-white/80 backdrop-blur-md shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]">
               <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 pb-4">
-                <CardTitle className="text-primary text-xl sm:text-2xl font-serif">Family Members</CardTitle>
+                <CardTitle className="text-primary text-xl sm:text-2xl font-serif">Father</CardTitle>
               </CardHeader>
               <CardContent className="pt-8 pb-6">
-                <div className="space-y-8">
-                  <motion.div variants={childVariant}>
-                    <FamilyMember
-                      relation="Father"
-                      name={family.father.name}
-                      occupation={family.father.occupation}
-                      icon={
-                        <svg
-                          className="w-5 h-5 text-primary"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                          />
-                        </svg>
-                      }
-                    />
-                  </motion.div>
+                <div className="space-y-6">
+                  <DetailItem
+                    label="Name"
+                    value={family.father.name}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                    }
+                  />
+                  <DetailItem
+                    label="Occupation"
+                    value={family.father.occupation}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    }
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-                  <motion.div variants={childVariant}>
-                    <FamilyMember
-                      relation="Mother"
-                      name={family.mother.name}
-                      occupation={family.mother.occupation}
-                      icon={
-                        <svg
-                          className="w-5 h-5 text-primary"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                          />
-                        </svg>
-                      }
-                    />
-                  </motion.div>
+          <motion.div variants={fadeInVariants}>
+            <Card className="border-secondary/30 bg-white/80 backdrop-blur-md shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]">
+              <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 pb-4">
+                <CardTitle className="text-primary text-xl sm:text-2xl font-serif">Mother</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-8 pb-6">
+                <div className="space-y-6">
+                  <DetailItem
+                    label="Name"
+                    value={family.mother.name}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                    }
+                  />
+                  <DetailItem
+                    label="Occupation"
+                    value={family.mother.occupation}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    }
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-                  {family.siblings.map((sibling, index) => (
-                    <motion.div key={index} variants={childVariant}>
-                      <FamilyMember
-                        relation={sibling.relation}
-                        name={sibling.name}
-                        occupation={sibling.occupation || ""}
-                        icon={
-                          <svg
-                            className="w-5 h-5 text-primary"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                            />
-                          </svg>
-                        }
-                      />
-                    </motion.div>
-                  ))}
+          <motion.div variants={fadeInVariants}>
+            <Card className="border-secondary/30 bg-white/80 backdrop-blur-md shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]">
+              <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 pb-4">
+                <CardTitle className="text-primary text-xl sm:text-2xl font-serif">Sister</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-8 pb-6">
+                <div className="space-y-6">
+                  <DetailItem
+                    label="Name"
+                    value={family.sister.name}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                    }
+                  />
+                  <DetailItem
+                    label="Occupation"
+                    value={family.sister.occupation}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    }
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={fadeInVariants}>
+            <Card className="border-secondary/30 bg-white/80 backdrop-blur-md shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]">
+              <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 pb-4">
+                <CardTitle className="text-primary text-xl sm:text-2xl font-serif">Brother</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-8 pb-6">
+                <div className="space-y-6">
+                  <DetailItem
+                    label="Name"
+                    value={family.brother.name}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                    }
+                  />
+                  <DetailItem
+                    label="Occupation"
+                    value={family.brother.occupation}
+                    icon={
+                      <svg
+                        className="w-5 h-5 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    }
+                  />
                 </div>
               </CardContent>
             </Card>
