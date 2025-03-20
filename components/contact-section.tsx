@@ -26,63 +26,10 @@ export default function ContactSection({ contact }: ContactSectionProps) {
     offset: ["start end", "end end"],
   })
 
-  // Background color transition based on scroll
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.7])
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.95])
-  const blur = useTransform(scrollYProgress, [0.8, 1], [0, 5])
-
-  // Start animations when section comes into view
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return
-
-      const rect = sectionRef.current.getBoundingClientRect()
-      const isInView = rect.top < window.innerHeight && rect.bottom > 0
-
-      if (isInView) {
-        controls.start("visible")
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll() // Check on mount
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [controls])
-
-  const staggerChildren = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const childVariant = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  }
-
   return (
-    <section id="contact" ref={sectionRef} className="py-20 min-h-screen flex flex-col justify-center relative">
-      {/* Background that fades in as we scroll */}
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-white via-primary/5 to-primary/10 pointer-events-none"
-        style={{
-          opacity: useTransform(scrollYProgress, [0.5, 1], [0, 0.8]),
-          filter: `blur(${blur}px)`,
-        }}
-      />
-
+    <section id="contact" ref={sectionRef} className="py-20 min-h-screen flex flex-col justify-center">
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div style={{ opacity, y, scale }} className="max-w-4xl mx-auto">
+        <motion.div className="max-w-4xl mx-auto">
           <motion.h2
             className={cn(
               "text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-12 sm:mb-16",
