@@ -216,182 +216,87 @@ export const generateDOCX = async () => {
       <html>
       <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vishvarajsinh Biodata</title>
         <style>
           body { 
             font-family: Arial, sans-serif; 
             margin: 0; 
-            padding: 20px; 
-            background-color: #f8f9fa;
-          }
-          .container {
-            background-color: white;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
+            -webkit-text-size-adjust: 100%;
           }
-          .header {
-            background: linear-gradient(to right, #0f3460, #16488c);
-            height: 15px;
-            margin: -20px -20px 20px -20px;
+          table {
+            width: 100%;
+            border-collapse: collapse;
           }
-          .footer {
-            background: linear-gradient(to right, #0f3460, #16488c);
-            height: 10px;
-            margin: 20px -20px -20px -20px;
+          td {
+            padding: 8px;
+            word-break: break-word;
           }
-          h1 { color: #0f3460; text-align: center; }
-          h2 { color: #0f3460; text-align: center; margin-bottom: 20px; }
-          .profile-img { 
-            display: block; 
-            width: 150px; 
-            height: auto; 
-            margin: 0 auto 20px; 
-            border: 2px solid #b8860b; 
-          }
-          h3 { 
-            color: #0f3460; 
-            border-bottom: 1px solid #b8860b; 
-            padding-bottom: 5px; 
-          }
-          table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-bottom: 20px; 
-          }
-          td { 
-            padding: 8px; 
-            vertical-align: top; 
-          }
-          .label { 
-            font-weight: bold; 
-            width: 40%; 
-          }
-          .footer-text {
-            text-align: center;
-            font-size: 10px;
-            color: #666;
-            margin-top: 20px;
+          img {
+            max-width: 100%;
+            height: auto;
           }
         </style>
       </head>
       <body>
-        <div class="container">
-          <div class="header"></div>
-          
-          <h1>Biodata</h1>
-          <h2>${biodata.name}</h2>
-          
-          <h3>Personal Details</h3>
-          <table>
-            <tr>
-              <td class="label">Date of Birth:</td>
-              <td>${biodata.personalDetails.birthdate} (Age: 21 Years)</td>
-            </tr>
-            <tr>
-              <td class="label">Birth Place:</td>
-              <td>${biodata.personalDetails.birthplace}</td>
-            </tr>
-            <tr>
-              <td class="label">Height:</td>
-              <td>${biodata.personalDetails.height}</td>
-            </tr>
-            <tr>
-              <td class="label">Weight:</td>
-              <td>${biodata.personalDetails.weight}</td>
-            </tr>
-            <tr>
-              <td class="label">Education:</td>
-              <td>${biodata.personalDetails.education}</td>
-            </tr>
-            <tr>
-              <td class="label">Current Status:</td>
-              <td>${biodata.personalDetails.currentStatus}</td>
-            </tr>
-            <tr>
-              <td class="label">Religion & Caste:</td>
-              <td>${biodata.personalDetails.religion}, ${biodata.personalDetails.caste}</td>
-            </tr>
-            <tr>
-              <td class="label">Zodiac Sign:</td>
-              <td>${biodata.personalDetails.zodiacSign}</td>
-            </tr>
-            <tr>
-              <td class="label">Blood Group:</td>
-              <td>${biodata.personalDetails.bloodGroup}</td>
-            </tr>
-          </table>
-          
-          <h3>Family Details</h3>
-          <table>
-            <tr>
-              <td class="label">Father:</td>
-              <td>${biodata.family.father.name} (${biodata.family.father.occupation})</td>
-            </tr>
-            <tr>
-              <td class="label">Mother:</td>
-              <td>${biodata.family.mother.name} (${biodata.family.mother.occupation})</td>
-            </tr>
-            <tr>
-              <td class="label">Sister:</td>
-              <td>${biodata.family.siblings[0].name}</td>
-            </tr>
-          </table>
-          
-          <h3>Education & Career</h3>
-          <table>
-            <tr>
-              <td class="label">Current:</td>
-              <td>${biodata.education[0].degree} at ${biodata.education[0].institution} (${biodata.education[0].year})</td>
-            </tr>
-            <tr>
-              <td class="label">Graduation:</td>
-              <td>${biodata.education[1].degree} from ${biodata.education[1].institution} (${biodata.education[1].year})</td>
-            </tr>
-            <tr>
-              <td class="label">Experience:</td>
-              <td>${biodata.education[3].degree} at ${biodata.education[3].institution} (${biodata.education[3].year})</td>
-            </tr>
-          </table>
-          
-          <h3>Hobbies & Interests</h3>
-          <p>${biodata.personalDetails.hobbies}</p>
-          
-          <h3>Contact Details</h3>
-          <table>
-            <tr>
-              <td class="label">Phone:</td>
-              <td>${biodata.contact.phone}</td>
-            </tr>
-            <tr>
-              <td class="label">Father's Phone:</td>
-              <td>${biodata.contact.fatherPhone}</td>
-            </tr>
-            <tr>
-              <td class="label">Email:</td>
-              <td>${biodata.contact.email}</td>
-            </tr>
-            <tr>
-              <td class="label">Address:</td>
-              <td>${biodata.contact.address}</td>
-            </tr>
-          </table>
-          
-          <div class="footer"></div>
-          <div class="footer-text">© ${new Date().getFullYear()} ${biodata.name} | Biodata</div>
-        </div>
+        <h1 style="text-align: center; color: #0f3460;">Biodata</h1>
+        <h2 style="text-align: center;">${biodata.name}</h2>
+        
+        <h3 style="color: #0f3460; border-bottom: 1px solid #b8860b;">Personal Details</h3>
+        <table>
+          <tr><td style="font-weight: bold;">Date of Birth:</td><td>${biodata.personalDetails.birthdate}</td></tr>
+          <tr><td style="font-weight: bold;">Birth Place:</td><td>${biodata.personalDetails.birthplace}</td></tr>
+          <tr><td style="font-weight: bold;">Height:</td><td>${biodata.personalDetails.height}</td></tr>
+          <tr><td style="font-weight: bold;">Weight:</td><td>${biodata.personalDetails.weight}</td></tr>
+          <tr><td style="font-weight: bold;">Education:</td><td>${biodata.personalDetails.education}</td></tr>
+          <tr><td style="font-weight: bold;">Current Status:</td><td>${biodata.personalDetails.currentStatus}</td></tr>
+          <tr><td style="font-weight: bold;">Religion & Caste:</td><td>${biodata.personalDetails.religion}, ${biodata.personalDetails.caste}</td></tr>
+          <tr><td style="font-weight: bold;">Zodiac Sign:</td><td>${biodata.personalDetails.zodiacSign}</td></tr>
+          <tr><td style="font-weight: bold;">Blood Group:</td><td>${biodata.personalDetails.bloodGroup}</td></tr>
+        </table>
+
+        <h3 style="color: #0f3460; border-bottom: 1px solid #b8860b;">Family Details</h3>
+        <table>
+          <tr><td style="font-weight: bold;">Father:</td><td>${biodata.family.father.name} (${biodata.family.father.occupation})</td></tr>
+          <tr><td style="font-weight: bold;">Mother:</td><td>${biodata.family.mother.name} (${biodata.family.mother.occupation})</td></tr>
+          <tr><td style="font-weight: bold;">Sister:</td><td>${biodata.family.siblings[0].name}</td></tr>
+        </table>
+
+        <h3 style="color: #0f3460; border-bottom: 1px solid #b8860b;">Education & Career</h3>
+        <table>
+          <tr><td style="font-weight: bold;">Current:</td><td>${biodata.education[0].degree} at ${biodata.education[0].institution} (${biodata.education[0].year})</td></tr>
+          <tr><td style="font-weight: bold;">Graduation:</td><td>${biodata.education[1].degree} from ${biodata.education[1].institution} (${biodata.education[1].year})</td></tr>
+          <tr><td style="font-weight: bold;">Experience:</td><td>${biodata.education[3].degree} at ${biodata.education[3].institution} (${biodata.education[3].year})</td></tr>
+        </table>
+
+        <h3 style="color: #0f3460; border-bottom: 1px solid #b8860b;">Hobbies & Interests</h3>
+        <p>${biodata.personalDetails.hobbies}</p>
+
+        <h3 style="color: #0f3460; border-bottom: 1px solid #b8860b;">Contact Details</h3>
+        <table>
+          <tr><td style="font-weight: bold;">Phone:</td><td>${biodata.contact.phone}</td></tr>
+          <tr><td style="font-weight: bold;">Father's Phone:</td><td>${biodata.contact.fatherPhone}</td></tr>
+          <tr><td style="font-weight: bold;">Email:</td><td>${biodata.contact.email}</td></tr>
+          <tr><td style="font-weight: bold;">Address:</td><td>${biodata.contact.address}</td></tr>
+        </table>
       </body>
       </html>
     `
 
-    // Convert HTML to DOCX using a blob
-    const blob = new Blob([htmlContent], { type: "application/msword" })
-    const link = document.createElement("a")
+    // Create a blob
+    const blob = new Blob([htmlContent], { type: 'application/msword' })
+    
+    // Create download link
+    const link = document.createElement('a')
     link.href = URL.createObjectURL(blob)
     link.download = "Vishvarajsinh_Biodata.doc"
+    
+    // Trigger download
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+    URL.revokeObjectURL(link.href)
 
     // Show success message
     showSuccessToast("DOCX downloaded successfully!")
