@@ -2,6 +2,53 @@
 
 import type { Variants } from "framer-motion"
 
+// Simple fade in animation for all elements
+export const fadeInVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+}
+
+// Hover animations for interactive elements
+export const hoverScale = {
+  scale: 1.05,
+  transition: { duration: 0.3, ease: "easeOut" },
+}
+
+export const hoverButton = {
+  scale: 1.03,
+  transition: { duration: 0.2, ease: "easeOut" },
+}
+
+// Card animation
+export const cardVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+}
+
+// Text reveal animation
+export const revealVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+}
+
 // Fade up animation for sections
 export const fadeUpVariants: Variants = {
   hidden: {
@@ -28,19 +75,6 @@ export const staggerContainer: Variants = {
   },
 }
 
-// Subtle scale animation for cards
-export const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-}
-
 // Parallax effect for images
 export const parallaxVariants = (strength = 0.3): Variants => ({
   hidden: { y: 0 },
@@ -54,30 +88,6 @@ export const parallaxVariants = (strength = 0.3): Variants => ({
   },
 })
 
-// Reveal text animation
-export const revealVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-}
-
-// Hover animations for interactive elements
-export const hoverScale = {
-  scale: 1.05,
-  transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
-}
-
-export const hoverButton = {
-  scale: 1.03,
-  transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
-}
-
 // Background blur effect for sections
 export const blurVariants: Variants = {
   hidden: {
@@ -89,17 +99,6 @@ export const blurVariants: Variants = {
     opacity: 1,
     filter: "blur(0px)",
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-  },
-}
-
-export const fadeInVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      ease: "easeOut",
-    },
   },
 }
 
