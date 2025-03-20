@@ -5,6 +5,7 @@ import type { PersonalDetailsType } from "@/lib/data"
 import { motion } from "framer-motion"
 import { cardVariants, staggerContainer, revealVariants } from "@/lib/framer-animations"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { useTextZoom } from "@/hooks/use-text-zoom"
 
 interface PersonalDetailsProps {
   details: PersonalDetailsType
@@ -12,6 +13,7 @@ interface PersonalDetailsProps {
 
 export default function PersonalDetails({ details }: PersonalDetailsProps) {
   const { ref, isInView } = useScrollAnimation(0.2)
+  useTextZoom()
 
   return (
     <motion.section
