@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-white">
-      <main ref={mainRef} className="w-full overflow-x-hidden">
+      <main ref={mainRef} className="w-full">
         {/* Desktop Navigation */}
         <div className="hidden md:block">
           <FloatingNav activeSection={activeSection} />
