@@ -67,7 +67,6 @@ export const biodata: BiodataType = {
   additionalImages: [
     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_7838.JPG-HvqQUEClec4n4S3sdTSkxZzKSor7vs.jpeg",
     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4350.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2140.JPG-yG1TXCFrOCUANfvoiVCQnQEwQ7fQxX.jpeg",
     "https://qw5xvpu0ew2oeifi.public.blob.vercel-storage.com/profile4.jpg-L0yPCLvT51rmLKqOWnwuYhp2cqwjEW.JPG",
     "https://qw5xvpu0ew2oeifi.public.blob.vercel-storage.com/profile5.jpg-zLRsp0TcYoKkwJcFzNS2wM7OM51X4F.JPG",
     "https://qw5xvpu0ew2oeifi.public.blob.vercel-storage.com/profile6.jpg-23cFNdXJ8JvHr9VWkC2AT3VJRa3aBJ.JPG"
