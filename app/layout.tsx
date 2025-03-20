@@ -19,14 +19,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-white text-black antialiased`}>
+      <body className={`${inter.className} min-h-screen bg-white text-black antialiased overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="min-h-screen relative">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

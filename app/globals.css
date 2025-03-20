@@ -8,7 +8,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   touch-action: pan-y;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   position: relative;
   -webkit-overflow-scrolling: touch;
@@ -175,22 +175,25 @@ html, body {
 /* Mobile optimizations */
 @media (max-width: 768px) {
   html, body {
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    position: relative;
   }
 
   #__next, main {
-    height: 100%;
+    min-height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    position: relative;
   }
 
   .container {
     min-height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    position: relative;
   }
 
   .touch-target {
