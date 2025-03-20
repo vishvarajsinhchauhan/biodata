@@ -63,13 +63,13 @@ export const biodata: BiodataType = {
   name: "Chauhan Vishvarajsinh Vikramsinh",
   intro:
     "Greetings! I am a Computer Engineering graduate currently pursuing my Master's degree in Australia. I come from a traditional Rajput family and value our cultural heritage while embracing modern education and lifestyle.",
-  profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/profile1.png",
+  profileImage: "https://placehold.co/600x800",
   additionalImages: [
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/profile2.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/profile3.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/profile4.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/profile5.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/profile6.png",
+    "https://placehold.co/600x800?text=Image+2",
+    "https://placehold.co/600x800?text=Image+3",
+    "https://placehold.co/600x800?text=Image+4",
+    "https://placehold.co/600x800?text=Image+5",
+    "https://placehold.co/600x800?text=Image+6",
   ],
   personalDetails: {
     birthdate: "June 27, 2003",

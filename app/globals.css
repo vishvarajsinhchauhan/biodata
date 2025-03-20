@@ -172,37 +172,56 @@ html, body {
   }
 }
 
+/* Reset base styles */
+html {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  min-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   html, body {
-    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
     width: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    position: relative;
-    overscroll-behavior-y: none;
-    touch-action: pan-y;
+    height: 100%;
   }
 
-  main {
-    min-height: 100%;
-    width: 100%;
+  #__next, main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    position: relative;
-    touch-action: pan-y;
+    height: 100%;
+  }
+
+  .container {
+    min-height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .touch-target {
     min-height: 44px;
     min-width: 44px;
-  }
-
-  /* Ensure content is scrollable */
-  .container {
-    min-height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   /* Fix any fixed position elements */

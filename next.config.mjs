@@ -14,21 +14,17 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com', 'localhost'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
-        port: '',
+        hostname: '*.public.blob.vercel-storage.com',
         pathname: '/**',
-      },
+      }
     ],
-    unoptimized: true,
+    unoptimized: true
   },
   experimental: {
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
+    optimizePackageImports: ['@/components'],
   },
 }
 
