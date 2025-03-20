@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { biodata } from "@/lib/data"
 import HeroSection from "@/components/hero-section"
 import PersonalSection from "@/components/personal-section"
@@ -10,18 +10,10 @@ import EducationSection from "@/components/education-section"
 import ContactSection from "@/components/contact-section"
 import FloatingNav from "@/components/floating-nav"
 import MobileNav from "@/components/mobile-nav"
-import { cn } from "@/lib/utils"
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero")
   const mainRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: mainRef,
-    offset: ["start start", "end end"],
-  })
-
-  // Background color transition based on scroll
-  const backgroundColor = useTransform(scrollYProgress, [0, 0.8, 1], ["#ffffff", "#ffffff", "#f0f4ff"])
 
   // Observer for active section
   useEffect(() => {
@@ -46,24 +38,23 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-white">
-      <motion.main
-        ref={mainRef}
-        className="w-full overflow-x-hidden overflow-y-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        style={{ backgroundColor }}
-      >
+      <main ref={mainRef} className="w-full overflow-x-hidden">
         {/* Desktop Navigation */}
         <div className="hidden md:block">
           <FloatingNav activeSection={activeSection} />
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden">
+        <div className="md:hidden fixed top-0 left-0 right-0 z-50">
           <MobileNav activeSection={activeSection} />
         </div>
 
-        <div className="space-y-20 pb-20">
+        <motion.div
+          className="space-y-20 pb-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <HeroSection
             name={biodata.name}
             intro={biodata.intro}
@@ -78,7 +69,7 @@ export default function Home() {
           <EducationSection education={biodata.education} />
 
           <ContactSection contact={biodata.contact} />
-        </div>
+        </motion.div>
 
         <footer className="py-8 text-center text-sm text-gray-500">
           <div className="container mx-auto px-4">
@@ -87,7 +78,7 @@ export default function Home() {
             </p>
           </div>
         </footer>
-      </motion.main>
+      </main>
     </div>
   )
 }
