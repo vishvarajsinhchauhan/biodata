@@ -38,12 +38,12 @@ export default function Home() {
 
   // Debug log to check if data is available
   useEffect(() => {
-    console.log('Biodata:', biodata)
+    console.log('Biodata loaded:', biodata)
   }, [])
 
   return (
     <div className="relative min-h-screen bg-white">
-      <main ref={mainRef} className="w-full overflow-x-hidden">
+      <main ref={mainRef} className="w-full">
         {/* Desktop Navigation */}
         <div className="hidden md:block">
           <FloatingNav activeSection={activeSection} />
@@ -60,7 +60,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {biodata && (
+          {biodata ? (
             <>
               <HeroSection
                 name={biodata.name}
@@ -77,6 +77,10 @@ export default function Home() {
 
               <ContactSection contact={biodata.contact} />
             </>
+          ) : (
+            <div className="flex items-center justify-center min-h-screen">
+              <p className="text-xl text-gray-600">Loading biodata...</p>
+            </div>
           )}
         </motion.div>
 

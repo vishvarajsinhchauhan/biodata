@@ -18,20 +18,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="!scroll-smooth">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-      </head>
-      <body className={`${inter.className} min-h-screen overflow-y-auto overscroll-none touch-pan-y bg-white`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} min-h-screen bg-white text-black antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen overflow-x-hidden">
-            {children}
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>
