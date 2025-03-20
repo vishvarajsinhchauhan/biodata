@@ -36,6 +36,11 @@ export default function Home() {
     }
   }, [])
 
+  // Debug log to check if data is available
+  useEffect(() => {
+    console.log('Biodata:', biodata)
+  }, [])
+
   return (
     <div className="relative min-h-screen bg-white">
       <main ref={mainRef} className="w-full overflow-x-hidden">
@@ -55,26 +60,30 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <HeroSection
-            name={biodata.name}
-            intro={biodata.intro}
-            profileImage={biodata.profileImage}
-            additionalImages={biodata.additionalImages}
-          />
+          {biodata && (
+            <>
+              <HeroSection
+                name={biodata.name}
+                intro={biodata.intro}
+                profileImage={biodata.profileImage}
+                additionalImages={biodata.additionalImages}
+              />
 
-          <PersonalSection details={biodata.personalDetails} />
+              <PersonalSection details={biodata.personalDetails} />
 
-          <FamilySection family={biodata.family} />
+              <FamilySection family={biodata.family} />
 
-          <EducationSection education={biodata.education} />
+              <EducationSection education={biodata.education} />
 
-          <ContactSection contact={biodata.contact} />
+              <ContactSection contact={biodata.contact} />
+            </>
+          )}
         </motion.div>
 
         <footer className="py-8 text-center text-sm text-gray-500">
           <div className="container mx-auto px-4">
             <p>
-              © {new Date().getFullYear()} {biodata.name} | Designed with elegance
+              © {new Date().getFullYear()} {biodata?.name || 'Biodata'} | Designed with elegance
             </p>
           </div>
         </footer>

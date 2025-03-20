@@ -22,14 +22,16 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-white`}>
+      <body className={`${inter.className} min-h-screen overflow-y-auto overscroll-none touch-pan-y bg-white`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="min-h-screen overflow-x-hidden">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
