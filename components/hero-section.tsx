@@ -3,7 +3,7 @@
 import { useState, useRef } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -171,6 +171,8 @@ export default function HeroSection({ name, intro, profileImage, additionalImage
             </DialogTrigger>
 
             <DialogContent className="sm:max-w-4xl bg-white/90 backdrop-blur-md p-0 rounded-2xl overflow-hidden border border-[#b8860b]/30">
+              <DialogTitle className="sr-only">Image Gallery</DialogTitle>
+              <DialogDescription className="sr-only">View and navigate through the image gallery</DialogDescription>
               <div className="relative h-[80vh]">
                 <motion.div
                   ref={imageRef}
