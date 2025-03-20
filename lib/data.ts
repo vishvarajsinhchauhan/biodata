@@ -104,7 +104,7 @@ export const biodata: BiodataType = {
     {
       degree: "Master of Computer Science",
       institution: "Deakin University, Melbourne, Australia",
-      year: "June 2025 - 2026",
+      year: "June 2025",
       description: "Will be commencing Master's degree with focus on advanced computing technologies.",
       type: "education",
     },
