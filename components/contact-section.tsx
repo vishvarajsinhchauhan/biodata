@@ -26,6 +26,21 @@ export default function ContactSection({ contact }: ContactSectionProps) {
     offset: ["start end", "end end"],
   })
 
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  }
+
+  useEffect(() => {
+    controls.start("visible")
+  }, [controls])
+
   return (
     <section id="contact" ref={sectionRef} className="py-20 min-h-screen flex flex-col justify-center">
       <div className="container mx-auto px-4 relative z-10">
@@ -35,21 +50,21 @@ export default function ContactSection({ contact }: ContactSectionProps) {
               "text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-12 sm:mb-16",
               "bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80",
             )}
-            initial={{ opacity: 0, y: 30 }}
-            animate={controls}
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            initial="hidden"
+            animate="visible"
+            variants={fadeInVariants}
           >
             Get In Touch
           </motion.h2>
 
-          <motion.div initial="hidden" animate={controls} variants={staggerChildren}>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeInVariants}
+          >
             <Card
               className={cn(
-                "border-secondary/30 bg-white/90 backdrop-blur-md",
+                "border-secondary/30 bg-white/90",
                 "shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]",
                 "overflow-hidden",
               )}
@@ -60,7 +75,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
               <CardContent className="pt-8 pb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-6">
-                    <motion.div variants={childVariant}>
+                    <motion.div variants={fadeInVariants}>
                       <ContactItem
                         icon={<MapPin className="h-5 w-5 text-primary" />}
                         label="Address"
@@ -68,7 +83,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                       />
                     </motion.div>
 
-                    <motion.div variants={childVariant}>
+                    <motion.div variants={fadeInVariants}>
                       <ContactItem
                         icon={<Mail className="h-5 w-5 text-primary" />}
                         label="Email"
@@ -80,7 +95,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                   </div>
 
                   <div className="space-y-6">
-                    <motion.div variants={childVariant}>
+                    <motion.div variants={fadeInVariants}>
                       <ContactItem
                         icon={<Phone className="h-5 w-5 text-primary" />}
                         label="Phone"
@@ -90,7 +105,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                       />
                     </motion.div>
 
-                    <motion.div variants={childVariant}>
+                    <motion.div variants={fadeInVariants}>
                       <ContactItem
                         icon={<Phone className="h-5 w-5 text-primary" />}
                         label="Father's Phone"
@@ -100,7 +115,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                       />
                     </motion.div>
 
-                    <motion.div variants={childVariant} className="pt-4 space-y-4">
+                    <motion.div variants={fadeInVariants} className="pt-4 space-y-4">
                       <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="w-full">
                         <Button
                           className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white shadow-lg hover:shadow-xl transition-all duration-300"
