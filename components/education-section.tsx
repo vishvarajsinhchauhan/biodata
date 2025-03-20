@@ -8,7 +8,7 @@ import SectionDivider from "@/components/section-divider"
 import { cn } from "@/lib/utils"
 import { GraduationCap, Award, Briefcase } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-import { staggerContainer, revealVariants, cardVariants } from "@/lib/framer-animations"
+import { staggerContainer, revealVariants, cardVariants, childVariant } from "@/lib/framer-animations"
 
 interface EducationSectionProps {
   education: EducationType[]
@@ -40,11 +40,11 @@ export default function EducationSection({ education }: EducationSectionProps) {
             <motion.div
               initial="hidden"
               animate={controls}
-              variants={cardVariants}
+              variants={staggerContainer}
               className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
             >
               {education.map((item, index) => (
-                <motion.div key={index} variants={cardVariants}>
+                <motion.div key={index} variants={childVariant}>
                   <Card className="border-secondary/30 bg-white/80 backdrop-blur-md shadow-[0_20px_80px_-15px_rgba(0,0,0,0.1)]">
                     <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 pb-4">
                       <CardTitle className="text-primary text-xl sm:text-2xl font-serif">{item.degree}</CardTitle>
@@ -108,7 +108,7 @@ export default function EducationSection({ education }: EducationSectionProps) {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth={2}
-                                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                               />
                             </svg>
                           }

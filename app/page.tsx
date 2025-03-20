@@ -10,6 +10,7 @@ import EducationSection from "@/components/education-section"
 import ContactSection from "@/components/contact-section"
 import FloatingNav from "@/components/floating-nav"
 import MobileNav from "@/components/mobile-nav"
+import { staggerContainer } from "@/lib/framer-animations"
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero")
@@ -56,9 +57,9 @@ export default function Home() {
 
         <motion.div
           className="space-y-20 pb-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
         >
           {biodata ? (
             <>

@@ -1,0 +1,38 @@
+[33m2ee6786[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m fix: update contact section to use imported animation variants
+[33m8cef665[m fix: update animation variants in all section components
+[33m06c3965[m revert: restore stagger animations and keep footer simple
+[33m6b95771[m fix: replace staggerContainer with fadeInVariants in all components
+[33maa9dcf9[m fix: remove stagger animations and simplify animation variants
+[33m17867cd[m fix: remove staggerChildren and simplify animations
+[33ma61a30f[m fix: remove staggerChildren and simplify animations
+[33m05fc461[m fix: remove white fade effect and update footer
+[33m656e80c[m feat: add mobile text zoom and improve animations
+[33ma94dbc6[m fix: update Master's degree to only show June 2025
+[33m460971f[m fix: improve mobile download functionality
+[33mcda1bab[m fix: update Master's degree start date to June 2025
+[33m11563bb[m fix: correct Master's degree completion year to 2025
+[33mae37d8c[m fix: update education status to reflect future enrollment
+[33mec9ffa2[m fix: remove duplicate photos from gallery
+[33m4537752[m feat: add three new unique photos to gallery
+[33m66cb042[m fix: update additional images to include all six unique photos
+[33mac17642[m fix: update layout and styles for proper content visibility
+[33m7127dd3[m fix: restore working image URLs and config
+[33m1e89eac[m fix: restore content visibility and proper rendering
+[33m35759d4[m fix: ensure proper content rendering and data loading
+[33m5fb79dc[m fix: restore proper content rendering and animations
+[33mc0c3c79[m fix: restore animations and transitions
+[33mc61aafe[m fix: update theme provider and layout for proper rendering
+[33mece19bd[m fix: update image URLs to use Vercel Blob storage
+[33m2fcb481[m fix: rename image files to remove double extension
+[33mc1a0dc4[m fix: simplify image configuration for local images
+[33mbd4403c[m fix: update layout and content rendering
+[33m5beaee2[m fix: update page structure and image paths
+[33me48e2f4[m fix: update image URLs and mobile scrolling
+[33m7c6f388[m fix: update layout and page structure for proper rendering
+[33m966fd62[m fix: update image configuration and mobile scrolling
+[33m6ae7c3b[m fix: update image URLs and mobile scrolling
+[33m140636c[m fix: update mobile scrolling and image configuration
+[33m4510aa4[m fix: update Next.js config for proper image handling
+[33m061e661[m fix: update React version to be compatible with react-day-picker
+[33m77f6026[m fix: update date-fns version to be compatible with react-day-picker
+[33m9f38abe[m Initial commit

@@ -11,7 +11,7 @@ import type { ContactType } from "@/lib/data"
 import { cn } from "@/lib/utils"
 import { generatePDF, generateDOCX } from "@/lib/pdf-generator"
 import { useTouchRipple } from "@/hooks/use-touch-gestures"
-import { staggerContainer, revealVariants, cardVariants } from "@/lib/framer-animations"
+import { staggerContainer, revealVariants, cardVariants, childVariant } from "@/lib/framer-animations"
 
 interface ContactSectionProps {
   contact: ContactType
@@ -64,7 +64,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
               <CardContent className="pt-8 pb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-6">
-                    <motion.div variants={cardVariants}>
+                    <motion.div variants={childVariant}>
                       <ContactItem
                         icon={<MapPin className="h-5 w-5 text-primary" />}
                         label="Address"
@@ -72,7 +72,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                       />
                     </motion.div>
 
-                    <motion.div variants={cardVariants}>
+                    <motion.div variants={childVariant}>
                       <ContactItem
                         icon={<Mail className="h-5 w-5 text-primary" />}
                         label="Email"
@@ -84,7 +84,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                   </div>
 
                   <div className="space-y-6">
-                    <motion.div variants={cardVariants}>
+                    <motion.div variants={childVariant}>
                       <ContactItem
                         icon={<Phone className="h-5 w-5 text-primary" />}
                         label="Phone"
@@ -94,7 +94,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                       />
                     </motion.div>
 
-                    <motion.div variants={cardVariants}>
+                    <motion.div variants={childVariant}>
                       <ContactItem
                         icon={<Phone className="h-5 w-5 text-primary" />}
                         label="Father's Phone"
@@ -104,7 +104,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                       />
                     </motion.div>
 
-                    <motion.div variants={cardVariants} className="pt-4 space-y-4">
+                    <motion.div variants={childVariant} className="pt-4 space-y-4">
                       <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="w-full">
                         <Button
                           className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white shadow-lg hover:shadow-xl transition-all duration-300"
