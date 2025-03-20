@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { biodata } from "@/lib/data"
 import HeroSection from "@/components/hero-section"
 import PersonalSection from "@/components/personal-section"
@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-white">
-      <main ref={mainRef} className="w-full">
+      <main ref={mainRef} className="w-full overflow-x-hidden">
         {/* Desktop Navigation */}
         <div className="hidden md:block">
           <FloatingNav activeSection={activeSection} />
@@ -49,27 +49,30 @@ export default function Home() {
           <MobileNav activeSection={activeSection} />
         </div>
 
-        <motion.div
-          className="space-y-20 pb-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <HeroSection
-            name={biodata.name}
-            intro={biodata.intro}
-            profileImage={biodata.profileImage}
-            additionalImages={biodata.additionalImages}
-          />
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="space-y-20 pb-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <HeroSection
+              name={biodata.name}
+              intro={biodata.intro}
+              profileImage={biodata.profileImage}
+              additionalImages={biodata.additionalImages}
+            />
 
-          <PersonalSection details={biodata.personalDetails} />
+            <PersonalSection details={biodata.personalDetails} />
 
-          <FamilySection family={biodata.family} />
+            <FamilySection family={biodata.family} />
 
-          <EducationSection education={biodata.education} />
+            <EducationSection education={biodata.education} />
 
-          <ContactSection contact={biodata.contact} />
-        </motion.div>
+            <ContactSection contact={biodata.contact} />
+          </motion.div>
+        </AnimatePresence>
 
         <footer className="py-8 text-center text-sm text-gray-500">
           <div className="container mx-auto px-4">
