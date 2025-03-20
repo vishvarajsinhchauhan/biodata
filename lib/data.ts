@@ -62,7 +62,7 @@ export interface BiodataType {
 export const biodata: BiodataType = {
   name: "Chauhan Vishvarajsinh Vikramsinh",
   intro:
-    "Greetings! I am a Computer Engineering graduate and will be pursuing my Master's degree at Deakin University, Australia from June 2024. I come from a traditional Rajput family and value our cultural heritage while embracing modern education and lifestyle.",
+    "Greetings! I am a Computer Engineering graduate and will be pursuing my Master's degree at Deakin University, Australia from June 2025. I come from a traditional Rajput family and value our cultural heritage while embracing modern education and lifestyle.",
   profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2140.JPG-yG1TXCFrOCUANfvoiVCQnQEwQ7fQxX.jpeg",
   additionalImages: [
     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_7838.JPG-HvqQUEClec4n4S3sdTSkxZzKSor7vs.jpeg",
@@ -77,7 +77,7 @@ export const biodata: BiodataType = {
     height: "5'11\"",
     weight: "65kg",
     education: "B.Tech in Computer Engineering",
-    currentStatus: "Joining Master's degree at Deakin University, Australia in June 2024",
+    currentStatus: "Will be joining Master's degree at Deakin University, Australia in June 2025",
     religion: "Hindu Rajput",
     caste: "Chauhan",
     zodiacSign: "Taurus (Vrushabh)",
@@ -104,8 +104,8 @@ export const biodata: BiodataType = {
     {
       degree: "Master of Computer Science",
       institution: "Deakin University, Melbourne, Australia",
-      year: "June 2024 - 2025",
-      description: "Commencing Master's degree with focus on advanced computing technologies.",
+      year: "June 2025 - 2026",
+      description: "Will be commencing Master's degree with focus on advanced computing technologies.",
       type: "education",
     },
     {
