@@ -3,7 +3,6 @@
 import type { Variants } from "framer-motion"
 
 // Base animation variants
-export const staggerChildren = 0.1
 export const childVariant = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -36,7 +35,7 @@ export const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren,
+      staggerChildren: 0.1,
       delayChildren: 0.1,
     },
   },
