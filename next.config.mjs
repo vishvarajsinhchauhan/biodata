@@ -9,7 +9,7 @@ try {
 const nextConfig = {
   images: {
     unoptimized: true,
-    domains: ['localhost'],
+    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
   },
   typescript: {
     ignoreBuildErrors: true
