@@ -63,13 +63,13 @@ export const biodata: BiodataType = {
   name: "Chauhan Vishvarajsinh Vikramsinh",
   intro:
     "Greetings! I am a Computer Engineering graduate currently pursuing my Master's degree in Australia. I come from a traditional Rajput family and value our cultural heritage while embracing modern education and lifestyle.",
-  profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4350.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
+  profileImage: "/images/profile1.jpg",
   additionalImages: [
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4350.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4351.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4352.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4353.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4354.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
+    "/images/profile2.jpg",
+    "/images/profile3.jpg",
+    "/images/profile4.jpg",
+    "/images/profile5.jpg",
+    "/images/profile6.jpg",
   ],
   personalDetails: {
     birthdate: "June 27, 2003",

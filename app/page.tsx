@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { biodata } from "@/lib/data"
 import HeroSection from "@/components/hero-section"
 import PersonalSection from "@/components/personal-section"
@@ -11,7 +11,6 @@ import ContactSection from "@/components/contact-section"
 import FloatingNav from "@/components/floating-nav"
 import MobileNav from "@/components/mobile-nav"
 import { cn } from "@/lib/utils"
-import { useSwipe } from "@/hooks/use-touch-gestures"
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero")
@@ -45,71 +44,51 @@ export default function Home() {
     }
   }, [])
 
-  // Handle swipe gestures for section navigation
-  useSwipe({
-    onSwipeUp: () => {
-      const sections = ["hero", "personal", "family", "education", "contact"]
-      const currentIndex = sections.indexOf(activeSection)
-      if (currentIndex < sections.length - 1) {
-        const nextSection = sections[currentIndex + 1]
-        document.getElementById(nextSection)?.scrollIntoView({ behavior: "smooth" })
-      }
-    },
-    onSwipeDown: () => {
-      const sections = ["hero", "personal", "family", "education", "contact"]
-      const currentIndex = sections.indexOf(activeSection)
-      if (currentIndex > 0) {
-        const prevSection = sections[currentIndex - 1]
-        document.getElementById(prevSection)?.scrollIntoView({ behavior: "smooth" })
-      }
-    },
-  })
-
   return (
-    <motion.main
-      ref={mainRef}
-      className={cn(
-        "min-h-screen w-full overflow-x-hidden overflow-y-auto",
-        "selection:bg-primary/20 selection:text-primary"
-      )}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      style={{ backgroundColor }}
-    >
-      {/* Desktop Navigation */}
-      <div className="hidden md:block">
-        <FloatingNav activeSection={activeSection} />
-      </div>
-
-      {/* Mobile Navigation */}
-      <div className="md:hidden">
-        <MobileNav activeSection={activeSection} />
-      </div>
-
-      <HeroSection
-        name={biodata.name}
-        intro={biodata.intro}
-        profileImage={biodata.profileImage}
-        additionalImages={biodata.additionalImages}
-      />
-
-      <PersonalSection details={biodata.personalDetails} />
-
-      <FamilySection family={biodata.family} />
-
-      <EducationSection education={biodata.education} />
-
-      <ContactSection contact={biodata.contact} />
-
-      <footer className="py-8 text-center text-sm text-gray-500">
-        <div className="container mx-auto px-4">
-          <p>
-            © {new Date().getFullYear()} {biodata.name} | Designed with elegance
-          </p>
+    <div className="relative min-h-screen bg-white">
+      <motion.main
+        ref={mainRef}
+        className="w-full overflow-x-hidden overflow-y-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        style={{ backgroundColor }}
+      >
+        {/* Desktop Navigation */}
+        <div className="hidden md:block">
+          <FloatingNav activeSection={activeSection} />
         </div>
-      </footer>
-    </motion.main>
+
+        {/* Mobile Navigation */}
+        <div className="md:hidden">
+          <MobileNav activeSection={activeSection} />
+        </div>
+
+        <div className="space-y-20 pb-20">
+          <HeroSection
+            name={biodata.name}
+            intro={biodata.intro}
+            profileImage={biodata.profileImage}
+            additionalImages={biodata.additionalImages}
+          />
+
+          <PersonalSection details={biodata.personalDetails} />
+
+          <FamilySection family={biodata.family} />
+
+          <EducationSection education={biodata.education} />
+
+          <ContactSection contact={biodata.contact} />
+        </div>
+
+        <footer className="py-8 text-center text-sm text-gray-500">
+          <div className="container mx-auto px-4">
+            <p>
+              © {new Date().getFullYear()} {biodata.name} | Designed with elegance
+            </p>
+          </div>
+        </footer>
+      </motion.main>
+    </div>
   )
 }
 
