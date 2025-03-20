@@ -63,13 +63,13 @@ export const biodata: BiodataType = {
   name: "Chauhan Vishvarajsinh Vikramsinh",
   intro:
     "Greetings! I am a Computer Engineering graduate currently pursuing my Master's degree in Australia. I come from a traditional Rajput family and value our cultural heritage while embracing modern education and lifestyle.",
-  profileImage: "https://placehold.co/600x800",
+  profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4350.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
   additionalImages: [
-    "https://placehold.co/600x800?text=Image+2",
-    "https://placehold.co/600x800?text=Image+3",
-    "https://placehold.co/600x800?text=Image+4",
-    "https://placehold.co/600x800?text=Image+5",
-    "https://placehold.co/600x800?text=Image+6",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4350.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4351.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4352.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4353.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4354.JPG-lOGP32Ygla7VXlLhFoDCDHlRGputJV.jpeg",
   ],
   personalDetails: {
     birthdate: "June 27, 2003",

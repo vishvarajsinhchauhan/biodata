@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} overflow-y-auto`}>
+    <html lang="en" className="scroll-smooth h-full">
+      <body className={`${inter.className} h-full overflow-auto overscroll-none`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <main className="min-h-screen">
             {children}
