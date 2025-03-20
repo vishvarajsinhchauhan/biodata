@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import type { FamilyType } from "@/lib/data"
 import { motion } from "framer-motion"
-import { cardVariants, staggerContainer, revealVariants } from "@/lib/framer-animations"
+import { cardVariants, fadeInVariants } from "@/lib/framer-animations"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 interface FamilyDetailsProps {
@@ -19,9 +19,9 @@ export default function FamilyDetails({ family }: FamilyDetailsProps) {
       ref={ref}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      variants={staggerContainer}
+      variants={fadeInVariants}
     >
-      <motion.h2 className="text-3xl font-bold text-center mb-12 text-[#1e40af] font-serif" variants={revealVariants}>
+      <motion.h2 className="text-3xl font-bold text-center mb-12 text-[#1e40af] font-serif" variants={fadeInVariants}>
         Family Details
       </motion.h2>
 
@@ -33,20 +33,20 @@ export default function FamilyDetails({ family }: FamilyDetailsProps) {
           <CardContent className="pt-8">
             <motion.div
               className="space-y-8"
-              variants={staggerContainer}
               initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              animate="visible"
+              variants={fadeInVariants}
             >
-              <motion.div variants={revealVariants}>
+              <motion.div variants={fadeInVariants}>
                 <FamilyMember relation="Father" name={family.father.name} occupation={family.father.occupation} />
               </motion.div>
 
-              <motion.div variants={revealVariants}>
+              <motion.div variants={fadeInVariants}>
                 <FamilyMember relation="Mother" name={family.mother.name} occupation={family.mother.occupation} />
               </motion.div>
 
               {family.siblings.map((sibling, index) => (
-                <motion.div key={index} variants={revealVariants}>
+                <motion.div key={index} variants={fadeInVariants}>
                   <FamilyMember relation={sibling.relation} name={sibling.name} occupation={sibling.occupation || ""} />
                 </motion.div>
               ))}

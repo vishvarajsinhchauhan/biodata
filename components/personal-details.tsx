@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import type { PersonalDetailsType } from "@/lib/data"
 import { motion } from "framer-motion"
-import { cardVariants, staggerContainer, revealVariants } from "@/lib/framer-animations"
+import { cardVariants, fadeInVariants } from "@/lib/framer-animations"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useTextZoom } from "@/hooks/use-text-zoom"
 
@@ -21,13 +21,16 @@ export default function PersonalDetails({ details }: PersonalDetailsProps) {
       ref={ref}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      variants={staggerContainer}
     >
-      <motion.h2 className="text-3xl font-bold text-center mb-12 text-[#1e40af] font-serif" variants={revealVariants}>
+      <motion.h2 className="text-3xl font-bold text-center mb-12 text-[#1e40af] font-serif" variants={fadeInVariants}>
         Personal Details
       </motion.h2>
 
-      <motion.div variants={cardVariants}>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+      >
         <Card className="border-[#d4af37] bg-white/80 backdrop-blur-md shadow-xl overflow-hidden">
           <CardHeader className="bg-gradient-to-r from-[#1e40af]/5 to-[#1e40af]/20 pb-2">
             <CardTitle className="text-[#1e40af] text-xl">About Me</CardTitle>
@@ -35,36 +38,36 @@ export default function PersonalDetails({ details }: PersonalDetailsProps) {
           <CardContent className="pt-8">
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 gap-8"
-              variants={staggerContainer}
               initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              animate="visible"
+              variants={fadeInVariants}
             >
               <div className="space-y-6">
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Date of Birth" value={details.birthdate} />
                 </motion.div>
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Birth Place" value={details.birthplace} />
                 </motion.div>
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Height" value={details.height} />
                 </motion.div>
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Weight" value={details.weight} />
                 </motion.div>
               </div>
 
               <div className="space-y-6">
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Education" value={details.education} />
                 </motion.div>
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Current Status" value={details.currentStatus} />
                 </motion.div>
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Religion" value={details.religion} />
                 </motion.div>
-                <motion.div variants={revealVariants}>
+                <motion.div variants={fadeInVariants}>
                   <DetailItem label="Caste" value={details.caste} />
                 </motion.div>
               </div>
